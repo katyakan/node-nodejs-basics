@@ -1,12 +1,11 @@
 import path from 'path';
 import { release, version } from 'os';
 import { createServer as createServerHttp } from 'http';
-// import aJson from './files/a.json';
-// import bJson from './files/b.json';
+
 import './files/c.js';
 
 const random = Math.random();
-// Update import statements for JSON files with assertion type
+
 let unknownObject;
 
 if (random > 0.5) {
