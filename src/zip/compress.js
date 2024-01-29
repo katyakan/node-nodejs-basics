@@ -2,17 +2,18 @@ import fs from 'fs';
 import zlib from 'zlib';
 import { pipeline } from 'stream';
 import { promisify } from 'util';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 const pipelineAsync = promisify(pipeline);
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const pathToSource = __dirname + '/files/fileToCompress.txt';
-const pathToDestination = __dirname + '/files/compressed.gz';
-const compress = async () => {
+const compress = async (
+  pathToSource = join(__dirname, 'files', 'fileToCompress.txt'),
+  pathToDestination = join(__dirname, 'files', 'compressed.gz')
+) => {
   try {
     await fs.promises.access(pathToSource);
   } catch (err) {
@@ -45,4 +46,4 @@ const compress = async () => {
   );
 };
 
-await compress(pathToSource, pathToDestination);
+await compress();
